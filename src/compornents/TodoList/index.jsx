@@ -2,7 +2,7 @@
  * TodoList
  */
 /* styles */
-import "./style.css"
+import styles from "./style.module.css"
 /**
  * TodoList
  * @param {*} props 
@@ -13,13 +13,13 @@ export const TodoList = (props) => {
     /** props */
     const{todoList, handleDeleteTodo} = props;
     return (
-    <ul className="todo-list">
+    <ul className={styles.todoList}>
         {todoList.map((todo) => {
         return (
-            <li className="todo" key = {todo.id}>
-                <span className="task">{todo.title}</span>
-                <i className="fa-solid fa-trash-can trash"
-                  onClick={() => handleDeleteTodo(todo.id, todo.title)}>
+            <li className={styles.todo} key = {todo.id}>
+                <span className={styles.task}>{todo.title}</span>
+                <i className={`fa-solid fa-trash-can ${styles.trash}`}
+                onClick={() => handleDeleteTodo(todo.id, todo.title)}>
                 </i>
             </li>
                 );
