@@ -22,6 +22,8 @@ export const useApp = () => {
   const [addInputValue, setAddInputValue] = useState("");
   /* 採番用ID*/
   const [uniqueId, setUniqueId] = useState(INIT_TODO_ID);
+  /* 検索キーワード */
+  const [searchKeyword, setSearchKeyword] = useState("")
   /**
    * add input value更新処理
    * @param {*} event
@@ -68,6 +70,24 @@ export const useApp = () => {
     }
   };
 
+  const handleSearchTodo = (e) => {
+    const keyword = e.target.value;
+    setSearchKeyword(keyword);
+
+  };
+
+  const searchTodo = () => {
+    // 検索処理
+    const newTodoList = todoList.filter((todo) => {
+      const regexp = new RegExp("^" + searchKeyword, "i");
+      return todo.title.match(regexp);
+
+    });
+    return newTodoList;
+
+    // 検索条件にマッチしたTodoだけ返す
+  };
+
   // todoListはデータ、setTodoListは更新するための関数
   // useStateの引数にinitTodoを入れることで、todoListの初期値として扱える
 
@@ -75,11 +95,13 @@ export const useApp = () => {
     {
       todoList,
       addInputValue,
+      searchKeyword,
     },
     {
       onChangeAddInputValue,
       handleAddTodo,
       handleDeleteTodo,
+      handleSearchTodo
     },
   ];
 };
